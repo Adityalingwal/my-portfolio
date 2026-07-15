@@ -1,0 +1,301 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ *
+ * Self-hosted fonts — General Sans (400/500/600/700), Space Mono (400/700).
+ * Decoded from scratchpad/redesign/fonts_b64.json, see src/assets/fonts.
+ * ------------------------------------------------------------------ */
+@font-face {
+  font-family: 'General Sans';
+  src: url('./assets/fonts/GeneralSans-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('./assets/fonts/GeneralSans-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('./assets/fonts/GeneralSans-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('./assets/fonts/GeneralSans-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/SpaceMono-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/SpaceMono-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* deliberately single-theme: the mockup commits to the cream world, no dark mode */
+@layer base {
+  html {
+    background: theme('colors.cream');
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: theme('fontFamily.sans');
+    background: theme('colors.cream');
+    color: theme('colors.ink');
+    height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto; /* fits in one screen on desktop; small screens can still reach everything */
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 3px solid theme('colors.blue');
+    outline-offset: 3px;
+  }
+}
+
+/* film grain so the cream doesn't read flat */
+.grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  opacity: 0.05;
+  z-index: 60;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 56px);
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* ── nav: full-width capsule bar; active pill stays widest,
+       hovered pills stretch into the row (animated flex-grow) ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, theme('colors.cream') 90%, transparent);
+  backdrop-filter: blur(8px);
+}
+.site-nav {
+  list-style: none;
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 16px clamp(20px, 4vw, 56px) 10px;
+  display: flex;
+  gap: 10px;
+}
+.site-nav li {
+  flex: 1 1 0;
+  min-width: max-content; /* never squeeze below the label */
+  border: 2px solid theme('colors.ink');
+  border-radius: 99px;
+  background: transparent;
+  transition:
+    flex-grow 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+    background 0.25s ease;
+}
+.site-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: theme('colors.ink');
+  white-space: nowrap;
+  overflow: hidden;
+  transition: color 0.25s ease;
+}
+/* hover: only fill invert, NO stretch — stretch only on the active (current route) pill */
+.site-nav li:hover {
+  background: theme('colors.ink');
+}
+.site-nav li:hover a {
+  color: theme('colors.cream');
+}
+.site-nav li.active {
+  flex-grow: 2.4;
+}
+.site-nav li.active a {
+  font-weight: 700;
+}
+
+/* ── hero: full-width editorial about — lead statement across the
+       page, then a two-column split (Currently | Fusion) ── */
+.hero {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: clamp(16px, 3.5vh, 44px) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.lead {
+  font-size: clamp(26px, 3.4vw, 46px);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+  margin: 0 0 5vh;
+  text-wrap: balance;
+}
+.cols {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(32px, 7vw, 110px);
+  align-items: start;
+  margin-bottom: 4.5vh;
+}
+.col-title {
+  font-family: theme('fontFamily.mono');
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: theme('colors.muted');
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid theme('colors.ink');
+}
+.about-body {
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.65;
+  font-weight: 400;
+  margin: 0;
+}
+.current {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.6;
+}
+.current li {
+  padding-left: 30px;
+  position: relative;
+  margin: 0 0 10px;
+}
+.current li .arr {
+  position: absolute;
+  left: 0;
+  font-family: theme('fontFamily.mono');
+  font-weight: 700;
+}
+.current .more {
+  color: theme('colors.ink');
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cta {
+  font-family: theme('fontFamily.sans');
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 99px;
+  padding: 13px 26px;
+  text-decoration: none;
+  border: 2px solid theme('colors.ink');
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.cta.fill {
+  background: theme('colors.ink');
+  color: theme('colors.cream');
+}
+.cta.fill:hover {
+  background: theme('colors.orange');
+  color: theme('colors.ink');
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 theme('colors.ink');
+}
+.cta.ghost {
+  background: transparent;
+  color: theme('colors.ink');
+}
+.cta.ghost:hover {
+  background: theme('colors.ink');
+  color: theme('colors.cream');
+  transform: translateY(-2px);
+}
+.cta .arr {
+  transition: transform 0.18s ease;
+}
+.cta:hover .arr {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .site-nav li {
+    transition: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero {
+    min-height: auto;
+  }
+  .cols {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .site-nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .site-nav li {
+    flex: 1 1 40%;
+  }
+  .site-nav a {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
