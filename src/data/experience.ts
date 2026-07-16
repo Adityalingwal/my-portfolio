@@ -1,7 +1,8 @@
 /**
  * Work Experience page copy — kept as typed data so content edits never touch markup.
- * Copy is verbatim from scratchpad/work-exp-directions.template.html (#dirA, "The Ledger"),
- * merged with the evidence link + "Where to next" CTA row ported from #dirB.
+ * Copy is verbatim from scratchpad/work-exp-v3-directions.template.html (#dirK2,
+ * "The Journey, refined") — the tick-rule timeline direction, not the earlier
+ * circle-node "#dirK" or the rail-less "#dirL" variants.
  */
 
 import type { KeywordColor, TextSegment } from '@/components/Segments';
@@ -13,19 +14,38 @@ export interface EvidenceLink {
   href: string;
 }
 
+/** Stop 1 — humble opener: a short scene-setting sentence with one emphasized clause. */
+export interface JourneyOpener {
+  when: string;
+  text: TextSegment[];
+}
+
+/** Stop 2 — the work: a dated label plus the standard bullet list. */
+export interface JourneyWork {
+  when: string;
+  bullets: TextSegment[][];
+}
+
+/** Stop 3 — the peak-end punch line, optionally with a proof link. */
+export interface JourneyEnd {
+  when: string;
+  /** Shows the shared "Ongoing" live-pill next to the date label. */
+  ongoing?: boolean;
+  punch: TextSegment[];
+  proof?: EvidenceLink;
+}
+
 export interface ExperienceEntry {
   id: 'arka' | 'fusion';
-  years: string;
-  /** Secondary Space Mono metadata lines, rendered one per line. */
-  subLines: string[];
-  /** Shows the bordered "Ongoing" pill with the orange dot. */
-  ongoing?: boolean;
+  chapter: string;
   role: string;
   company: string;
   companyKeyword: KeywordColor;
-  oneliner: TextSegment[];
-  bullets: TextSegment[][];
-  evidenceLink?: EvidenceLink;
+  /** Mono meta line under the head row, e.g. "SF Bay Area · Remote · Full-time". */
+  meta: string;
+  opener: JourneyOpener;
+  work: JourneyWork;
+  end: JourneyEnd;
 }
 
 export interface ExperienceContent {
@@ -47,91 +67,96 @@ export const experienceContent: ExperienceContent = {
   entries: [
     {
       id: 'arka',
-      years: '2024 → 2026',
-      subLines: ['Oct 2024 — Jul 2026', 'San Francisco Bay Area', 'Remote · Full-time'],
+      chapter: 'CH.01',
       role: 'Founding Engineer',
       company: 'Arka AI',
       companyKeyword: 'blue',
-      oneliner: [
-        {
-          text: 'First engineer with full ownership of the product — shipped and grew it from a hiring-interview tool into a legal-tech ',
-        },
-        { text: 'voice AI platform', keyword: 'blue' },
-        {
-          text: ' that runs client consultations over phone, WhatsApp and web for immigration law firms in the UK, US and beyond.',
-        },
-      ],
-      bullets: [
-        [
-          {
-            text: 'Built the whole voice infrastructure end to end — speech-to-text, an LLM and text-to-speech wired into one real-time streaming loop — handling live interruptions with reply latency between ',
-          },
-          { text: '1.5–2 seconds', keyword: 'blue' },
+      meta: 'SF Bay Area · Remote · Full-time',
+      opener: {
+        when: 'OCT 2024',
+        text: [
+          { text: 'It began as a hiring-interview tool — no voice product yet, and ' },
+          { text: 'I was the first engineer', emphasis: true },
+          { text: '.' },
         ],
-        [
-          { text: 'Designed a ' },
-          { text: 'multi-agent system', keyword: 'pink' },
-          {
-            text: ' where specialized agents work a single conversation — smooth routing and handoffs, backed by long-term memory that remembers each user across calls',
-          },
+      },
+      work: {
+        when: 'THE TWO YEARS IN BETWEEN',
+        bullets: [
+          [
+            {
+              text: 'Built the whole voice loop — speech-to-text, an LLM and text-to-speech streaming in real time, with live interruptions handled',
+            },
+          ],
+          [
+            { text: 'Designed a ' },
+            { text: 'multi-agent system', keyword: 'pink' },
+            { text: ' with smooth routing, handoffs and long-term memory across calls' },
+          ],
+          [
+            { text: 'Built an in-house ' },
+            { text: 'eval system', keyword: 'coral' },
+            { text: ' — an LLM judge on every call, simulated calls, live failure monitoring' },
+          ],
+          [{ text: 'Onboarded immigration law firms across the UK and US directly' }],
         ],
-        [
-          { text: 'Built an in-house ' },
-          { text: 'evaluation system', keyword: 'coral' },
-          {
-            text: ' — an LLM judge scoring every call on pass/fail metrics, simulated calls to catch regressions, and live monitoring that flags failures the moment they happen',
-          },
+      },
+      end: {
+        when: 'JUL 2026',
+        punch: [
+          { text: 'By the time I left, it was a legal-tech ' },
+          { text: 'voice AI platform', keyword: 'blue' },
+          { text: ' — consultations over phone, WhatsApp and web, ' },
+          { text: 'thousands of real calls', strong: true },
+          { text: ', replies in ' },
+          { text: '1.5–2 seconds', strong: true },
+          { text: '.' },
         ],
-        [
-          {
-            text: 'Worked directly with law firms across the UK and US — onboarding them and getting their voice agents live to handle ',
-          },
-          { text: 'thousands of real calls', keyword: 'blue' },
-        ],
-      ],
+      },
     },
     {
       id: 'fusion',
-      years: '2026 → now',
-      subLines: ['May 2026 — Present', 'Open source'],
-      ongoing: true,
+      chapter: 'CH.02',
       role: 'Creator',
       company: 'Fusion',
       companyKeyword: 'yellow',
-      oneliner: [
-        {
-          text: 'An open-source Claude Code plugin where the two best AI models — Claude and GPT — plan your hardest tasks together. You catch more, miss less, and get one stronger plan.',
+      meta: 'Open source · Solo project',
+      opener: {
+        when: 'MAY 2026',
+        text: [
+          { text: 'It started with a lesson from all that research: ' },
+          { text: 'one model alone misses things', emphasis: true },
+          { text: '.' },
+        ],
+      },
+      work: {
+        when: 'SINCE THEN',
+        bullets: [
+          [
+            {
+              text: 'Dual-model planning — Claude and GPT plan the same task independently, then merge into one clear plan; ',
+            },
+            { text: 'disagreements shown, not hidden', keyword: 'yellow' },
+          ],
+          [{ text: 'An evidence-first workflow — every claim needs proof from the actual code' }],
+          [{ text: 'Local-first design — SQLite, a localhost dashboard, zero external dependencies' }],
+          [{ text: 'Next: a review mode where both models check the finished code' }],
+        ],
+      },
+      end: {
+        when: 'TODAY',
+        ongoing: true,
+        punch: [
+          { text: "It's an open-source plugin anyone can install — " },
+          { text: 'two models, one stronger plan', strong: true },
+          { text: ', at ' },
+          { text: 'zero API cost', strong: true },
+          { text: '.' },
+        ],
+        proof: {
+          label: 'View Fusion on GitHub →',
+          href: 'https://github.com/Adityalingwal/Fusion',
         },
-      ],
-      bullets: [
-        [
-          {
-            text: 'Built the core of the plugin — Claude and GPT each make their own plan for the same task, then the two are combined into one clear plan; ',
-          },
-          { text: 'disagreements shown, not hidden', keyword: 'yellow' },
-        ],
-        [
-          {
-            text: 'Took the multi-model fusion idea OpenRouter proved for deep research and brought it into the coding workflow as a native ',
-          },
-          { text: 'Claude Code plugin', keyword: 'blue' },
-        ],
-        [
-          { text: 'Kept the workflow ' },
-          { text: 'evidence-first', keyword: 'coral' },
-          {
-            text: ' — both models must back every claim with proof from the actual code; two models agreeing without proof is still unproven',
-          },
-        ],
-        [
-          { text: 'Designed it ' },
-          { text: 'local-first', keyword: 'pink' },
-          { text: ' — SQLite storage, a localhost dashboard, zero external dependencies, zero API cost' },
-        ],
-      ],
-      evidenceLink: {
-        label: 'View Fusion on GitHub →',
-        href: 'https://github.com/Adityalingwal/Fusion',
       },
     },
   ],

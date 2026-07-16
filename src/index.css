@@ -393,10 +393,17 @@ header {
   transform: translateX(4px);
 }
 
-/* ── Work Experience — "The Ledger" (scratchpad/work-exp-directions.template.html #dirA),
-       plus the evidence link + "Where to next" CTA row ported from #dirB. ── */
+/* ── Work Experience — "The Journey, refined" (scratchpad/work-exp-v3-directions.template.html
+       #dirK2), plus the evidence link + "Where to next" CTA row shared with
+       the earlier Ledger implementation. Also used by Personal Projects
+       (.exp-hero / .eyebrow / .page-lead / .bullets / .ev-link / .next-row /
+       .next-label / .live-pill / .keyword* below are shared — do not scope
+       them to Work Experience only). ── */
 .exp-hero {
   padding: clamp(48px, 6vh, 72px) 0 clamp(28px, 4vh, 42px);
+}
+.story {
+  max-width: 900px;
 }
 .eyebrow {
   font-family: theme('fontFamily.mono');
@@ -421,93 +428,155 @@ header {
 .page-lead strong {
   font-weight: 700;
 }
-.ledger {
+.journey2 {
   border-top: 2px solid theme('colors.ink');
+  padding: clamp(38px, 5vh, 56px) 0 clamp(42px, 5vh, 60px);
 }
-.ledger-row {
-  display: grid;
-  grid-template-columns: 230px 1fr;
-  gap: clamp(28px, 4vw, 64px);
-  padding: clamp(34px, 4.5vh, 52px) 8px;
+.journey2:last-of-type {
   border-bottom: 2px solid theme('colors.ink');
-  position: relative;
 }
-.ledger-row::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 280ms ease;
-  pointer-events: none;
-}
-.ledger-row.co-arka::before {
-  background: linear-gradient(115deg, rgba(145, 167, 255, 0.14) 0%, rgba(248, 222, 245, 0.1) 70%, transparent 100%);
-}
-.ledger-row.co-fusion::before {
-  background: linear-gradient(115deg, rgba(255, 209, 102, 0.16) 0%, rgba(247, 220, 233, 0.1) 70%, transparent 100%);
-}
-.ledger-row:hover::before {
-  opacity: 1;
-}
-.ledger-left {
+.jr-head {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
 }
-.ledger-years {
+.jr-num {
   font-family: theme('fontFamily.mono');
-  font-size: clamp(19px, 1.6vw, 24px);
+  font-size: clamp(14px, 1.2vw, 17px);
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
 }
-.ledger-sub {
+.jr-role {
+  font-size: clamp(28px, 2.6vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.jr-co {
+  font-size: clamp(18px, 1.6vw, 23px);
+  font-weight: 500;
+}
+.jr-dates {
   font-family: theme('fontFamily.mono');
-  font-size: 12px;
+  font-size: 12.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: theme('colors.muted');
-  line-height: 1.7;
-}
-.ledger-now {
-  display: inline-flex;
+  margin: 0 0 clamp(28px, 3.5vh, 38px);
+  display: flex;
   align-items: center;
-  gap: 7px;
-  margin-top: 6px;
-  width: max-content;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.path2 {
+  position: relative;
+  padding-left: 0;
+}
+.path2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 14px;
+  width: 2px;
+  background: theme('colors.ink');
+}
+.stop2 {
+  position: relative;
+  padding: 0 0 clamp(28px, 3.8vh, 40px) 44px;
+}
+.stop2:last-child {
+  padding-bottom: 0;
+}
+.stop2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 22px;
+  height: 2.5px;
+  background: theme('colors.ink');
+}
+.stop2.end::before {
+  width: 32px;
+  height: 5px;
+  top: 9px;
+}
+.journey2.co-arka .stop2.end::before {
+  background: theme('colors.blue');
+}
+.journey2.co-fusion .stop2.end::before {
+  background: theme('colors.yellow');
+}
+.stop2-when {
   font-family: theme('fontFamily.mono');
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border: 1.5px solid theme('colors.ink');
-  border-radius: 99px;
-  padding: 5px 12px;
-  background: theme('colors.cream');
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-.ledger-now .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 99px;
-  background: theme('colors.orange');
+.stop2-when .live-pill {
+  margin-left: 2px;
 }
-.ledger-role {
-  font-size: clamp(26px, 2.4vw, 38px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 0 0 4px;
-  line-height: 1.15;
-}
-.ledger-co {
+.stop2-text {
   font-size: clamp(17px, 1.5vw, 21px);
-  font-weight: 500;
-  margin: 0 0 16px;
+  line-height: 1.5;
+  margin: 0;
+  color: theme('colors.muted');
+  max-width: 56ch;
 }
-.oneliner {
-  font-size: clamp(16px, 1.35vw, 19px);
-  line-height: 1.55;
-  margin: 0 0 20px;
-  max-width: 62ch;
+.jr-emphasis {
+  font-style: normal;
   color: theme('colors.ink');
+  font-weight: 500;
+}
+.stop2 .bullets li:last-child {
+  margin-bottom: 0;
+}
+.jr-punch {
+  font-size: clamp(23px, 2.2vw, 34px);
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  margin: 0;
+  max-width: 32ch;
+}
+.jr-punch strong {
+  font-weight: 700;
+  position: relative;
+  white-space: nowrap;
+}
+.jr-punch strong::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 4px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s ease;
+}
+.journey2.co-arka .jr-punch strong::after {
+  background: theme('colors.blue');
+}
+.journey2.co-fusion .jr-punch strong::after {
+  background: theme('colors.yellow');
+}
+.journey2:hover .jr-punch strong::after {
+  transform: scaleX(1);
+}
+.jr-proof {
+  margin-top: 16px;
+}
+.jr-proof .ev-link {
+  margin-top: 0;
 }
 .bullets {
   list-style: none;
@@ -747,12 +816,13 @@ header {
     transition: none;
   }
 
-  .ledger-row::before {
+  .sheet-row {
     transition: none;
   }
 
-  .sheet-row {
+  .jr-punch strong::after {
     transition: none;
+    transform: scaleX(1);
   }
 
   .reconstruct-text [data-reconstruct-char] {
@@ -809,10 +879,14 @@ header {
   .page-lead {
     max-width: none;
   }
-  .ledger-row {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    padding: 28px 4px;
+  .stop2 {
+    padding-left: 34px;
+  }
+  .stop2::before {
+    width: 17px;
+  }
+  .stop2.end::before {
+    width: 24px;
   }
 
   .sheet-row {
@@ -842,6 +916,31 @@ header {
   }
   .cta {
     width: 100%;
+  }
+
+  /* The punch line's bold spans stay single-line (for the underline-draw
+     effect) at every wider width, but at phone widths a long bold phrase can
+     force horizontal scroll. Correct wrapping beats the fancy effect here:
+     let those spans wrap and fall back to a static underline. */
+  .jr-punch strong {
+    white-space: normal;
+  }
+  .jr-punch strong::after {
+    content: none;
+  }
+  .journey2.co-arka .jr-punch strong {
+    text-decoration-line: underline;
+    text-decoration-color: theme('colors.blue');
+    text-decoration-thickness: 4px;
+    text-underline-offset: 5px;
+    text-decoration-skip-ink: none;
+  }
+  .journey2.co-fusion .jr-punch strong {
+    text-decoration-line: underline;
+    text-decoration-color: theme('colors.yellow');
+    text-decoration-thickness: 4px;
+    text-underline-offset: 5px;
+    text-decoration-skip-ink: none;
   }
 }
 
