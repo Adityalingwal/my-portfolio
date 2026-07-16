@@ -6,13 +6,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        // single-theme "cream world" — see scratchpad/redesign mockup
-        cream: '#FFFCE4', // page background
+        // Warm Porcelain + Editorial Punch, selected in the approved mockup pass.
+        cream: '#FBFAF6', // page background
         ink: '#0E100F', // primary text / borders
         muted: '#767D73', // secondary text
-        orange: '#FF8709', // CTA hover
-        pink: '#FEC5FB', // accent (reserved)
-        blue: '#2B6BFF', // focus ring / accent
+        orange: '#FF4D1F', // hero accent
+        pink: '#F783AC',
+        blue: '#91A7FF',
+        coral: '#FF8787',
+        yellow: '#FFD166',
+        mint: '#80D8B3',
       },
       fontFamily: {
         sans: ['"General Sans"', '"Segoe UI"', 'Roboto', 'sans-serif'],

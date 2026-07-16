@@ -79,3 +79,4 @@ mockup exactly.
   the GSAP magnetic hover entirely.
 - Placeholder pages (`Work Experience`, `Projects`, `Blogs`, `Contact`) are
   intentionally minimal — their designs aren't approved yet.
+# my-portfolio

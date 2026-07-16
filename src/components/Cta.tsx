@@ -22,16 +22,19 @@ export default function Cta({ href, variant, children, withArrow }: CtaProps) {
     const btn = ref.current;
     if (!btn) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
+    const disableMagnet = window.matchMedia(
+      '(prefers-reduced-motion: reduce), (hover: none), (pointer: coarse)',
+    ).matches;
+    if (disableMagnet) return;
 
     const xTo = gsap.quickTo(btn, 'x', { duration: 0.35, ease: 'power3' });
     const yTo = gsap.quickTo(btn, 'y', { duration: 0.35, ease: 'power3' });
 
     const handleMouseMove = (e: MouseEvent) => {
       const r = btn.getBoundingClientRect();
-      xTo((e.clientX - r.left - r.width / 2) * 0.25);
-      yTo((e.clientY - r.top - r.height / 2) * 0.35);
+      const clamp = gsap.utils.clamp(-8, 8);
+      xTo(clamp((e.clientX - r.left - r.width / 2) * 0.12));
+      yTo(clamp((e.clientY - r.top - r.height / 2) * 0.12));
     };
     const handleMouseLeave = () => {
       xTo(0);

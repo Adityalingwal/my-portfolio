@@ -25,7 +25,7 @@ export interface AboutContent {
 }
 
 export const aboutContent: AboutContent = {
-  leadPrefix: 'I am ',
+  leadPrefix: 'Hi, I am ',
   leadName: 'Aditya Lingwal',
   leadSuffix: ', an engineer who loves to research and reverse engineer great products.',
   currentTitle: 'Currently',
@@ -47,7 +47,7 @@ export const aboutContent: AboutContent = {
   fusionName: 'Fusion',
   fusionBodySuffix:
     ' — an open-source Claude Code plugin that makes Claude and GPT plan your hardest tasks together. You catch more, miss less, and get one stronger plan.',
-  ctaPrimary: 'See my work',
+  ctaPrimary: 'See work',
   ctaPrimaryHref: '/projects',
   ctaSecondary: "Let's talk",
   ctaSecondaryHref: '/contact',
