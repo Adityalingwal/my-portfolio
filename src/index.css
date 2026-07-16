@@ -204,8 +204,29 @@ header {
 .lead-underline {
   text-decoration-line: underline;
   text-decoration-color: #2b6bff;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 8px;
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 7px;
+  text-decoration-skip-ink: auto;
+}
+.reconstruct-text {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+.reconstruct-text::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0.035em;
+  left: 0;
+  height: 2.5px;
+  background: #2b6bff;
+  pointer-events: none;
+}
+.reconstruct-text [data-reconstruct-char] {
+  display: inline-block;
+  transform-origin: center 80%;
+  will-change: transform, opacity;
 }
 .lead-accent {
   color: #ff4d1f;
@@ -228,11 +249,11 @@ header {
   color: theme('colors.ink');
   margin: 0 0 18px;
   padding-bottom: 10px;
-  border-bottom: 2px solid theme('colors.ink');
+  border-bottom: 1.5px solid theme('colors.ink');
 }
 .about-body {
   font-size: clamp(15px, 1.22vw, 18px);
-  line-height: 1.72;
+  line-height: 1.6;
   font-weight: 400;
   margin: 0;
 }
@@ -317,8 +338,11 @@ header {
   gap: 8px;
 }
 .cta.fill {
+  min-width: 240px;
+  border-width: 2px;
   background: theme('colors.cream');
   color: theme('colors.ink');
+  font-weight: 700;
 }
 .cta.fill:hover,
 .cta.fill:focus-visible {
@@ -351,6 +375,10 @@ header {
   .cta,
   .site-nav li {
     transition: none;
+  }
+
+  .reconstruct-text [data-reconstruct-char] {
+    will-change: auto;
   }
 
   .site-nav li:hover,

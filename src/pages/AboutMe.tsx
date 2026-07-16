@@ -1,4 +1,5 @@
 import Cta from '@/components/Cta';
+import ReconstructText from '@/components/ReconstructText';
 import { aboutContent } from '@/data/about';
 
 /**
@@ -17,7 +18,7 @@ export default function AboutMe() {
             <br className="desktop-break" />
             {'who loves to research and '}
             <br className="desktop-break" />
-            <span className="lead-underline">reverse engineer</span>{' '}
+            <ReconstructText text="reverse engineer" />{' '}
             <span className="lead-accent">great products</span>.
           </p>
 
