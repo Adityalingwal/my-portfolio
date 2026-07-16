@@ -31,7 +31,7 @@ export const aboutContent: AboutContent = {
   currentTitle: 'Currently',
   currentItems: [
     {
-      text: 'digging through the leaked Claude Code codebase to see how they engineered the entire agentic infrastructure',
+      text: 'studying Claude Code’s agentic architecture to understand how its systems are engineered',
     },
     {
       text: 'reverse engineering how Wispr Flow built its full voice pipeline',

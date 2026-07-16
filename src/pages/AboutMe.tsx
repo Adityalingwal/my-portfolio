@@ -30,9 +30,8 @@ export default function AboutMe() {
                     <span className="arr">+</span>{' '}
                     {item.text === aboutContent.currentItems[0].text ? (
                       <>
-                        digging through the leaked{' '}
-                        <span className="keyword keyword-blue">Claude Code</span> codebase to see how
-                        they engineered the entire agentic infrastructure
+                        studying <span className="keyword keyword-blue">Claude Code</span>’s agentic
+                        architecture to understand how its systems are engineered
                       </>
                     ) : item.text === aboutContent.currentItems[1].text ? (
                       <>
