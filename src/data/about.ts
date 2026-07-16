@@ -18,6 +18,8 @@ export interface AboutContent {
   fusionBodyPrefix: string;
   fusionName: string;
   fusionBodySuffix: string;
+  fusionLinkLabel: string;
+  fusionHref: string;
   ctaPrimary: string;
   ctaPrimaryHref: string;
   ctaSecondary: string;
@@ -47,6 +49,8 @@ export const aboutContent: AboutContent = {
   fusionName: 'Fusion',
   fusionBodySuffix:
     ' — an open-source Claude Code plugin that makes Claude and GPT plan your hardest tasks together. You catch more, miss less, and get one stronger plan.',
+  fusionLinkLabel: 'Click here to try Fusion',
+  fusionHref: 'https://github.com/Adityalingwal/Fusion',
   ctaPrimary: 'See work',
   ctaPrimaryHref: '/projects',
   ctaSecondary: "Let's talk",

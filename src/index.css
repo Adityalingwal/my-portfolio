@@ -309,6 +309,24 @@ header {
 .fusion-link {
   white-space: nowrap;
 }
+.fusion-repo-link {
+  display: inline-block;
+  margin-top: 16px;
+  color: #111;
+  font-family: theme('fontFamily.sans');
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  border-bottom: 2px solid #111;
+  padding-bottom: 2px;
+}
+.fusion-repo-link:visited,
+.fusion-repo-link:hover,
+.fusion-repo-link:active {
+  color: #111;
+}
 .cta-row {
   display: flex;
   gap: 16px;

@@ -60,6 +60,14 @@ export default function AboutMe() {
                 </strong>
                 {aboutContent.fusionBodySuffix}
               </p>
+              <a
+                className="fusion-repo-link"
+                href={aboutContent.fusionHref}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {aboutContent.fusionLinkLabel}
+              </a>
             </div>
           </div>
 
