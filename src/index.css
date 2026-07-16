@@ -306,6 +306,10 @@ header {
   color: #8f6700;
   text-decoration-color: #ffd166;
 }
+.keyword-mint {
+  color: #2f7d5a;
+  text-decoration-color: theme('colors.mint');
+}
 .fusion-link {
   white-space: nowrap;
 }
@@ -389,9 +393,365 @@ header {
   transform: translateX(4px);
 }
 
+/* ── Work Experience — "The Ledger" (scratchpad/work-exp-directions.template.html #dirA),
+       plus the evidence link + "Where to next" CTA row ported from #dirB. ── */
+.exp-hero {
+  padding: clamp(48px, 6vh, 72px) 0 clamp(28px, 4vh, 42px);
+}
+.eyebrow {
+  font-family: theme('fontFamily.mono');
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid theme('colors.ink');
+  display: inline-block;
+}
+.page-lead {
+  font-size: clamp(34px, 3.4vw, 52px);
+  line-height: 1.13;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+  margin: 0 0 clamp(44px, 5vh, 64px);
+  text-wrap: balance;
+  max-width: 20ch;
+}
+.page-lead strong {
+  font-weight: 700;
+}
+.ledger {
+  border-top: 2px solid theme('colors.ink');
+}
+.ledger-row {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: clamp(28px, 4vw, 64px);
+  padding: clamp(34px, 4.5vh, 52px) 8px;
+  border-bottom: 2px solid theme('colors.ink');
+  position: relative;
+}
+.ledger-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 280ms ease;
+  pointer-events: none;
+}
+.ledger-row.co-arka::before {
+  background: linear-gradient(115deg, rgba(145, 167, 255, 0.14) 0%, rgba(248, 222, 245, 0.1) 70%, transparent 100%);
+}
+.ledger-row.co-fusion::before {
+  background: linear-gradient(115deg, rgba(255, 209, 102, 0.16) 0%, rgba(247, 220, 233, 0.1) 70%, transparent 100%);
+}
+.ledger-row:hover::before {
+  opacity: 1;
+}
+.ledger-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ledger-years {
+  font-family: theme('fontFamily.mono');
+  font-size: clamp(19px, 1.6vw, 24px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.ledger-sub {
+  font-family: theme('fontFamily.mono');
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: theme('colors.muted');
+  line-height: 1.7;
+}
+.ledger-now {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 6px;
+  width: max-content;
+  font-family: theme('fontFamily.mono');
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1.5px solid theme('colors.ink');
+  border-radius: 99px;
+  padding: 5px 12px;
+  background: theme('colors.cream');
+}
+.ledger-now .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: theme('colors.orange');
+}
+.ledger-role {
+  font-size: clamp(26px, 2.4vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+  line-height: 1.15;
+}
+.ledger-co {
+  font-size: clamp(17px, 1.5vw, 21px);
+  font-weight: 500;
+  margin: 0 0 16px;
+}
+.oneliner {
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.55;
+  margin: 0 0 20px;
+  max-width: 62ch;
+  color: theme('colors.ink');
+}
+.bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: clamp(15px, 1.18vw, 17px);
+  line-height: 1.6;
+}
+.bullets li {
+  padding-left: 30px;
+  position: relative;
+  margin: 0 0 13px;
+  max-width: 72ch;
+}
+.bullets li .arr {
+  position: absolute;
+  left: 0;
+  font-size: 22px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+.ev-link {
+  display: inline-block;
+  margin-top: 24px;
+  font-family: theme('fontFamily.sans');
+  font-size: 16px;
+  font-weight: 600;
+  color: theme('colors.ink');
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+.ev-link:hover,
+.ev-link:focus-visible {
+  text-decoration-color: theme('colors.orange');
+}
+.next-row {
+  margin-top: clamp(44px, 6vh, 64px);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.next-label {
+  font-family: theme('fontFamily.mono');
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  margin-right: 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid theme('colors.ink');
+}
+
+/* ── Personal Projects — "Teardown Sheets" (scratchpad/projects-directions.template.html #dirE).
+       Each project renders as a bordered specimen sheet with mono-labeled
+       spec rows; the row-tint hover is the page's single signature
+       interaction (see .sheet-row:hover below). ── */
+.sheets {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(30px, 4vh, 44px);
+}
+.sheet {
+  border: 2px solid theme('colors.ink');
+  border-radius: 14px;
+  background: theme('colors.cream');
+  overflow: hidden;
+}
+.sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px clamp(18px, 2.4vw, 30px);
+  border-bottom: 2px solid theme('colors.ink');
+  flex-wrap: wrap;
+}
+.sheet-head-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.specimen {
+  font-family: theme('fontFamily.mono');
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1.5px solid theme('colors.ink');
+  padding: 6px 10px;
+  transform: rotate(-2deg);
+  background: theme('colors.cream');
+}
+.sheet-name {
+  font-size: clamp(26px, 2.4vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.sheet-cat {
+  font-family: theme('fontFamily.mono');
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: theme('colors.muted');
+}
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: theme('fontFamily.mono');
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1.5px solid theme('colors.ink');
+  border-radius: 99px;
+  padding: 5px 12px;
+  background: theme('colors.cream');
+}
+.live-pill .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: theme('colors.orange');
+}
+.sheet-body {
+  margin: 0;
+}
+.sheet-row {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  border-bottom: 1.5px solid theme('colors.ink');
+  transition: background 200ms ease;
+}
+.sheet-row:last-child {
+  border-bottom: 0;
+}
+.sheet.accent-pink .sheet-row:hover {
+  background: rgba(247, 131, 172, 0.08);
+}
+.sheet.accent-mint .sheet-row:hover {
+  background: rgba(128, 216, 179, 0.1);
+}
+.sheet-label {
+  font-family: theme('fontFamily.mono');
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 18px clamp(18px, 2.4vw, 30px);
+  border-right: 1.5px solid theme('colors.ink');
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+}
+.sheet-val {
+  padding: 18px clamp(18px, 2.4vw, 30px);
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.6;
+  margin: 0;
+}
+.sheet-val .bullets {
+  margin: 0;
+}
+.sheet-val .bullets li:last-child {
+  margin-bottom: 0;
+}
+.sheet-val .ev-link {
+  margin-top: 0;
+}
+.sheet-stats {
+  display: flex;
+  gap: clamp(22px, 3vw, 48px);
+  flex-wrap: wrap;
+}
+.sheet-stats b {
+  font-family: theme('fontFamily.mono');
+  font-size: clamp(19px, 1.7vw, 25px);
+  font-weight: 700;
+  display: block;
+  padding-bottom: 3px;
+  border-bottom: 3px solid transparent;
+  width: max-content;
+}
+.sheet.accent-pink .sheet-stats b {
+  border-bottom-color: theme('colors.pink');
+}
+.sheet.accent-mint .sheet-stats b {
+  border-bottom-color: theme('colors.mint');
+}
+.sheet-stats span {
+  font-family: theme('fontFamily.mono');
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: theme('colors.muted');
+  display: block;
+  margin-top: 6px;
+}
+.stack-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.stack-pill {
+  font-family: theme('fontFamily.mono');
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1.5px solid theme('colors.ink');
+  border-radius: 99px;
+  padding: 5px 13px;
+}
+.sheet.accent-pink .stack-pill {
+  background: linear-gradient(115deg, rgba(247, 131, 172, 0.22), rgba(248, 222, 245, 0.28));
+}
+.sheet.accent-mint .stack-pill {
+  background: linear-gradient(114deg, rgba(200, 242, 211, 0.5), rgba(224, 248, 211, 0.42));
+}
+
+/* Touch/coarse pointers get no hover tint, so give the PROOF link a larger
+   comfortable tap target there without changing the desktop underline look. */
+@media (hover: none), (pointer: coarse) {
+  .sheet-val .ev-link {
+    padding: 10px 0;
+    line-height: 1.4;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cta,
   .site-nav li {
+    transition: none;
+  }
+
+  .ledger-row::before {
+    transition: none;
+  }
+
+  .sheet-row {
     transition: none;
   }
 
@@ -441,6 +801,30 @@ header {
   }
   .about-body {
     line-height: 1.65;
+  }
+
+  .exp-hero {
+    padding-top: 40px;
+  }
+  .page-lead {
+    max-width: none;
+  }
+  .ledger-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 28px 4px;
+  }
+
+  .sheet-row {
+    grid-template-columns: 1fr;
+  }
+  .sheet-label {
+    border-right: 0;
+    border-bottom: 1.5px dashed theme('colors.muted');
+    padding-bottom: 10px;
+  }
+  .sheet-val {
+    padding-top: 12px;
   }
 }
 
