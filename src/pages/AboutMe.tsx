@@ -14,7 +14,7 @@ export default function AboutMe() {
           <p className="lead">
             {aboutContent.leadPrefix}
             <strong className="lead-name">{aboutContent.leadName}</strong>
-            {', an engineer '}
+            {', an AI engineer '}
             <br className="desktop-break" />
             {'who loves to research and '}
             <br className="desktop-break" />

@@ -27,7 +27,7 @@ export interface AboutContent {
 export const aboutContent: AboutContent = {
   leadPrefix: 'Hi, I am ',
   leadName: 'Aditya Lingwal',
-  leadSuffix: ', an engineer who loves to research and reverse engineer great products.',
+  leadSuffix: ', an AI engineer who loves to research and reverse engineer great products.',
   currentTitle: 'Currently',
   currentItems: [
     {
