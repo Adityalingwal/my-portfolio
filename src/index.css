@@ -74,8 +74,8 @@
 
   #root {
     min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto minmax(min-content, 1fr);
   }
 
   a:focus-visible,
@@ -130,23 +130,9 @@ header {
   border-radius: 99px;
   background: theme('colors.cream');
   transition:
+    flex-grow 300ms ease-in-out,
     background-color 180ms ease,
     transform 180ms ease;
-}
-.site-nav li:nth-child(1) {
-  flex-grow: 1.25;
-}
-.site-nav li:nth-child(2) {
-  flex-grow: 1.3;
-}
-.site-nav li:nth-child(3) {
-  flex-grow: 1.2;
-}
-.site-nav li:nth-child(4) {
-  flex-grow: 0.9;
-}
-.site-nav li:nth-child(5) {
-  flex-grow: 0.98;
 }
 .site-nav a {
   display: flex;
@@ -166,31 +152,25 @@ header {
   overflow: hidden;
   transition: color 180ms ease;
 }
-.site-nav li:hover,
-.site-nav li:focus-within {
-  transform: translateY(-1px) scale(1.006);
+.site-nav li:hover {
+  transform: translateY(-1px);
 }
 .site-nav li:active {
   transform: translateY(1px) scale(0.998);
 }
-.site-nav li:nth-child(1):hover,
-.site-nav li:nth-child(1):focus-within {
+.site-nav li:nth-child(1):hover {
   background-image: linear-gradient(144.02deg, #bcebf5 4.56%, #f8def5 72.98%);
 }
-.site-nav li:nth-child(2):hover,
-.site-nav li:nth-child(2):focus-within {
+.site-nav li:nth-child(2):hover {
   background-image: linear-gradient(165.72deg, #f6ddf6 21.15%, #eaa6c8 81.93%);
 }
-.site-nav li:nth-child(3):hover,
-.site-nav li:nth-child(3):focus-within {
+.site-nav li:nth-child(3):hover {
   background-image: linear-gradient(111.45deg, #ffd1a3 19.42%, #f6dcf5 73.08%);
 }
-.site-nav li:nth-child(4):hover,
-.site-nav li:nth-child(4):focus-within {
+.site-nav li:nth-child(4):hover {
   background-image: linear-gradient(120deg, #ffe5a6 15%, #f7dce9 78%);
 }
-.site-nav li:nth-child(5):hover,
-.site-nav li:nth-child(5):focus-within {
+.site-nav li:nth-child(5):hover {
   background-image: linear-gradient(114.41deg, #c8f2d3 20.74%, #e0f8d3 65.5%);
 }
 
@@ -240,9 +220,10 @@ header {
 }
 .col-title {
   font-family: theme('fontFamily.mono');
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 1.3;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: theme('colors.ink');
   margin: 0 0 18px;
@@ -278,11 +259,7 @@ header {
 .current .more {
   color: theme('colors.ink');
   padding-left: 30px;
-  text-decoration-line: underline;
-  text-decoration-color: #2b6bff;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 5px;
-  text-decoration-skip-ink: auto;
+  text-decoration: none;
 }
 .keyword {
   color: theme('colors.ink');
@@ -340,18 +317,20 @@ header {
   gap: 8px;
 }
 .cta.fill {
-  background: linear-gradient(115deg, #cdd6ff 8%, #f7d6e8 92%);
+  background: theme('colors.cream');
   color: theme('colors.ink');
 }
-.cta.fill:hover {
+.cta.fill:hover,
+.cta.fill:focus-visible {
   background: linear-gradient(115deg, #becaff 8%, #f3c6df 92%);
   transform: translateY(-1px) scale(1.006);
 }
 .cta.ghost {
-  background: linear-gradient(115deg, #cef0db 8%, #ffe6aa 92%);
+  background: theme('colors.cream');
   color: theme('colors.ink');
 }
-.cta.ghost:hover {
+.cta.ghost:hover,
+.cta.ghost:focus-visible {
   background: linear-gradient(115deg, #bde8cd 8%, #ffdc86 92%);
   color: theme('colors.ink');
   transform: translateY(-1px) scale(1.006);
@@ -375,7 +354,6 @@ header {
   }
 
   .site-nav li:hover,
-  .site-nav li:focus-within,
   .site-nav li:active,
   .cta:hover,
   .cta:active {
@@ -437,8 +415,19 @@ header {
   }
 }
 
-/* Keep the complete desktop composition above the fold on shorter laptops. */
-@media (min-width: 861px) and (max-height: 820px) {
+@media (min-width: 861px) {
+  .site-nav {
+    gap: 0;
+  }
+
+  .site-nav li.active {
+    flex-grow: 3;
+  }
+}
+
+/* Keep the complete desktop composition above the fold in genuinely short
+   browser viewports. Typical full-screen laptops are taller than this in CSS px. */
+@media (min-width: 861px) and (max-height: 680px) {
   .site-nav {
     padding-top: 12px;
   }
@@ -476,5 +465,16 @@ header {
 
   .cta {
     min-height: 50px;
+  }
+}
+
+/* On taller desktop displays, balance the complete content block inside the
+   remaining viewport with a slight upward optical bias. Keeping the combined
+   vertical padding stable avoids reintroducing a large empty footer area. */
+@media (min-width: 861px) and (min-height: 681px) {
+  .hero {
+    justify-content: center;
+    padding-top: 36px;
+    padding-bottom: 76px;
   }
 }
