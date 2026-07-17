@@ -4,10 +4,7 @@ import gsap from 'gsap';
 
 export interface CtaProps {
   href: string;
-  variant: 'fill' | 'ghost';
   children: React.ReactNode;
-  /** Show the trailing arrow that nudges right on hover. */
-  withArrow?: boolean;
 }
 
 /**
@@ -15,7 +12,7 @@ export interface CtaProps {
  * reset on leave) — ported from scratchpad/redesign/portfolio_home.template.html.
  * Skipped entirely under prefers-reduced-motion.
  */
-export default function Cta({ href, variant, children, withArrow }: CtaProps) {
+export default function Cta({ href, children }: CtaProps) {
   const ref = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -50,9 +47,8 @@ export default function Cta({ href, variant, children, withArrow }: CtaProps) {
   }, []);
 
   return (
-    <Link ref={ref} to={href} className={`cta ${variant}`}>
+    <Link ref={ref} to={href} className="cta fill">
       {children}
-      {withArrow && <span className="arr">→</span>}
     </Link>
   );
 }

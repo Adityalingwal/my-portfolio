@@ -72,7 +72,7 @@ export default function AboutMe() {
           </div>
 
           <div className="cta-row">
-            <Cta href={aboutContent.ctaHref} variant="fill">
+            <Cta href={aboutContent.ctaHref}>
               {aboutContent.cta}
             </Cta>
           </div>
