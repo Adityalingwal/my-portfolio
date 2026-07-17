@@ -41,6 +41,8 @@ export interface ExperienceEntry {
   role: string;
   company: string;
   companyKeyword: KeywordColor;
+  /** External link for the company name (e.g. LinkedIn). Omit to render a plain span. */
+  companyHref?: string;
   /** Mono meta line under the head row, e.g. "SF Bay Area · Remote · Full-time". */
   meta: string;
   opener: JourneyOpener;
@@ -66,44 +68,60 @@ export const experienceContent: ExperienceContent = {
       role: 'Founding Engineer',
       company: 'Arka AI',
       companyKeyword: 'blue',
-      meta: 'SF Bay Area · Remote · Full-time',
+      companyHref: 'https://www.linkedin.com/company/arkaai/posts/?feedView=all',
+      meta: 'San Francisco Bay Area · Remote · Full-time',
       opener: {
         when: 'OCT 2024',
         text: [
-          { text: 'It began as a hiring-interview tool — no voice product yet, and ' },
-          { text: 'I was the first engineer', emphasis: true },
-          { text: '.' },
+          { text: 'Joined as the ' },
+          { text: 'first engineer', emphasis: true },
+          { text: ', when it was only a hiring-interview tool.' },
         ],
       },
       work: {
         when: 'THE TWO YEARS IN BETWEEN',
         bullets: [
           [
+            { text: 'Owned the ' },
+            { text: 'entire codebase', keyword: 'yellow' },
+            { text: ' solo — frontend, backend, AI and deployments, from first commit to production' },
+          ],
+          [
+            { text: 'Built the whole ' },
+            { text: 'voice loop', keyword: 'mint' },
             {
-              text: 'Built the whole voice loop — speech-to-text, an LLM and text-to-speech streaming in real time, with live interruptions handled',
+              text: ' — binding speech-to-text, an LLM and text-to-speech into one real-time stream, with live interruptions handled',
             },
           ],
           [
             { text: 'Designed a ' },
             { text: 'multi-agent system', keyword: 'pink' },
-            { text: ' with smooth routing, handoffs and long-term memory across calls' },
+            {
+              text: ' — specialized agents routing and handing off mid-conversation, with long-term memory so callers never have to start over',
+            },
           ],
           [
             { text: 'Built an in-house ' },
             { text: 'eval system', keyword: 'coral' },
-            { text: ' — an LLM judge on every call, simulated calls, live failure monitoring' },
+            {
+              text: ' — an LLM judge scoring every call, simulated calls to catch regressions, and live monitoring that flags failures as they happen',
+            },
           ],
-          [{ text: 'Onboarded immigration law firms across the UK and US directly' }],
+          [
+            { text: 'Went beyond engineering — onboarded ' },
+            { text: 'immigration law firms', keyword: 'blue' },
+            { text: ' across the UK and US, and took their voice agents live' },
+          ],
         ],
       },
       end: {
         when: 'JUL 2026',
         punch: [
-          { text: 'By the time I left, it was a legal-tech ' },
+          { text: "Now it's a legal-tech " },
           { text: 'voice AI platform', keyword: 'blue' },
-          { text: ' — consultations over phone, WhatsApp and web, ' },
+          { text: ' — running client consultations over phone, WhatsApp and web, handling ' },
           { text: 'thousands of real calls', strong: true },
-          { text: ', replies in ' },
+          { text: ', agent replying in ' },
           { text: '1.5–2 seconds', strong: true },
           { text: '.' },
         ],
@@ -115,17 +133,17 @@ export const experienceContent: ExperienceContent = {
       role: 'Creator',
       company: 'Fusion',
       companyKeyword: 'yellow',
-      meta: 'Open source · Solo project',
+      meta: 'Open source',
       opener: {
         when: 'MAY 2026',
         text: [
-          { text: 'It started with a lesson from all that research: ' },
+          { text: 'Months of using AI coding tools taught me one thing: ' },
           { text: 'one model alone misses things', emphasis: true },
           { text: '.' },
         ],
       },
       work: {
-        when: 'SINCE THEN',
+        when: "WHAT I'VE BUILT SO FAR",
         bullets: [
           [
             {
@@ -133,9 +151,20 @@ export const experienceContent: ExperienceContent = {
             },
             { text: 'disagreements shown, not hidden', keyword: 'yellow' },
           ],
-          [{ text: 'An evidence-first workflow — every claim needs proof from the actual code' }],
-          [{ text: 'Local-first design — SQLite, a localhost dashboard, zero external dependencies' }],
-          [{ text: 'Next: a review mode where both models check the finished code' }],
+          [
+            { text: 'An ' },
+            { text: 'evidence-first workflow', keyword: 'coral' },
+            { text: ' — every claim needs proof from the actual code' },
+          ],
+          [
+            { text: 'Local-first design', keyword: 'mint' },
+            { text: ' — SQLite, a localhost dashboard, zero external dependencies' },
+          ],
+          [
+            { text: 'Next: a ' },
+            { text: 'review mode', keyword: 'pink' },
+            { text: ' where both models check the finished code' },
+          ],
         ],
       },
       end: {
@@ -143,9 +172,9 @@ export const experienceContent: ExperienceContent = {
         ongoing: true,
         punch: [
           { text: "It's an open-source plugin anyone can install — " },
-          { text: 'two models, one stronger plan', strong: true },
-          { text: ', at ' },
-          { text: 'zero API cost', strong: true },
+          { text: 'two of the best frontier models', strong: true },
+          { text: ' working together to make ' },
+          { text: 'one stronger plan', strong: true },
           { text: '.' },
         ],
         proof: {

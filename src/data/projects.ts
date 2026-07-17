@@ -15,7 +15,7 @@ export interface SheetStat {
   caption: string;
 }
 
-/** Accent that drives the row-hover tint and the MEASURED underline color. */
+/** Accent that drives the STATS underline color. */
 export type SheetAccent = 'pink' | 'mint';
 
 export interface ProjectSheet {
@@ -26,10 +26,10 @@ export interface ProjectSheet {
   statusLabel: string;
   accent: SheetAccent;
   what: TextSegment[];
-  howItWorks: TextSegment[][];
-  measured: SheetStat[];
+  features: TextSegment[][];
+  measured?: SheetStat[];
   stack: string[];
-  proof: EvidenceLink;
+  source: EvidenceLink;
 }
 
 export interface ProjectsContent {
@@ -41,8 +41,8 @@ export interface ProjectsContent {
 
 export const projectsContent: ProjectsContent = {
   eyebrow: 'PERSONAL PROJECTS',
-  leadPrefix: 'I tear other products down. ',
-  leadBold: 'Here are mine, opened up',
+  leadPrefix: 'What I build ',
+  leadBold: 'in my own time',
   sheets: [
     {
       id: 'stayfree',
@@ -53,31 +53,26 @@ export const projectsContent: ProjectsContent = {
       accent: 'pink',
       what: [
         {
-          text: "Press a key, talk, and your words appear as text in whatever app you're using — on ",
+          text: "Press a key, speak, and your words appear as text in whatever app you're using — on ",
         },
         { text: 'Mac and Windows', keyword: 'pink' as KeywordColor },
         { text: '.' },
       ],
-      howItWorks: [
+      features: [
+        [
+          { text: 'Audio streams over a WebSocket as you speak — text lands ' },
+          { text: 'under 500ms', keyword: 'blue' as KeywordColor },
+          { text: ' after you release the key.' },
+        ],
+        [{ text: 'Understands English and Hinglish — the way people actually talk.' }],
         [
           {
-            text: 'Audio streams live over a WebSocket as you speak — no waiting for a recording to finish',
+            text: "Next: voice notes — press a key, speak your thought, and it's saved as a note.",
           },
         ],
-        [{ text: 'Handles English and Hinglish, the way people actually talk' }],
-        [
-          {
-            text: 'Next experiment: voice notes — one key press captures a quick note, no notes app',
-          },
-        ],
-      ],
-      measured: [
-        { value: '200–500ms', caption: 'key release → text' },
-        { value: '2 OS', caption: 'Mac + Windows' },
-        { value: '2 langs', caption: 'English + Hinglish' },
       ],
       stack: ['Electron', 'TypeScript', 'React', 'WebSocket'],
-      proof: {
+      source: {
         label: 'View repo on GitHub →',
         href: 'https://github.com/Adityalingwal/Stayfree',
       },
@@ -86,26 +81,26 @@ export const projectsContent: ProjectsContent = {
       id: 'brand-visibility',
       specimen: 'Specimen 02',
       name: 'AI Brand Visibility',
-      category: 'Apify actor · AI SEO',
+      category: 'AI SEO',
       statusLabel: 'Live on Apify',
       accent: 'mint',
       what: [
-        { text: 'Tracks how AI platforms — ' },
+        { text: 'Checks whether ' },
         { text: 'ChatGPT and Gemini', keyword: 'blue' as KeywordColor },
-        { text: ' — see and recommend a brand against its competitors.' },
+        { text: ' recommend your brand — or your competitors’.' },
       ],
-      howItWorks: [
+      features: [
         [
           {
-            text: 'Queries both platforms with custom prompts, detects brand mentions and analyzes positioning context',
+            text: 'Asks both platforms real questions about your brand, then detects where and how it gets mentioned.',
           },
         ],
         [
           {
-            text: 'Benchmarks up to 5 competitors — mention counts, platform rankings and visibility gaps in plain language',
+            text: 'Compares up to 5 competitors — who gets mentioned more, who ranks higher, and where your brand is missing.',
           },
         ],
-        [{ text: 'Paid, pay-per-event pricing on the Apify Store — exports to JSON, CSV or Excel' }],
+        [{ text: 'Live as a paid actor on the Apify Store — results export to JSON, CSV or Excel.' }],
       ],
       measured: [
         { value: '106', caption: 'store users' },
@@ -113,7 +108,7 @@ export const projectsContent: ProjectsContent = {
         { value: '4.17★', caption: 'user rating' },
       ],
       stack: ['Apify SDK', 'TypeScript', 'LLM APIs'],
-      proof: {
+      source: {
         label: 'View on Apify Store →',
         href: 'https://apify.com/adityalingwal/ai-brand-visibility',
       },

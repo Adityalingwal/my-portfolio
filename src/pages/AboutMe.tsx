@@ -72,11 +72,8 @@ export default function AboutMe() {
           </div>
 
           <div className="cta-row">
-            <Cta href={aboutContent.ctaPrimaryHref} variant="fill">
-              {aboutContent.ctaPrimary}
-            </Cta>
-            <Cta href={aboutContent.ctaSecondaryHref} variant="ghost">
-              {aboutContent.ctaSecondary}
+            <Cta href={aboutContent.ctaHref} variant="fill">
+              {aboutContent.cta}
             </Cta>
           </div>
         </div>

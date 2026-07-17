@@ -20,10 +20,8 @@ export interface AboutContent {
   fusionBodySuffix: string;
   fusionLinkLabel: string;
   fusionHref: string;
-  ctaPrimary: string;
-  ctaPrimaryHref: string;
-  ctaSecondary: string;
-  ctaSecondaryHref: string;
+  cta: string;
+  ctaHref: string;
 }
 
 export const aboutContent: AboutContent = {
@@ -45,14 +43,12 @@ export const aboutContent: AboutContent = {
   currentMore: 'and many more...',
   fusionTitle: 'What it led to',
   fusionBodyPrefix:
-    'Somewhere in all this research, I learned that one model alone can miss things. So I built ',
+    'After using so many AI coding tools, I kept noticing a pattern: one model alone can miss things. So I built ',
   fusionName: 'Fusion',
   fusionBodySuffix:
     ' — an open-source Claude Code plugin that makes Claude and GPT plan your hardest tasks together. You catch more, miss less, and get one stronger plan.',
   fusionLinkLabel: 'Click here to try Fusion',
   fusionHref: 'https://github.com/Adityalingwal/Fusion',
-  ctaPrimary: 'See work',
-  ctaPrimaryHref: '/projects',
-  ctaSecondary: "Let's talk",
-  ctaSecondaryHref: '/contact',
+  cta: "Let's talk",
+  ctaHref: '/contact',
 };

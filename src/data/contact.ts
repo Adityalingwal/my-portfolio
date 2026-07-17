@@ -28,7 +28,7 @@ export interface ContactContent {
 
 export const contactContent: ContactContent = {
   eyebrow: 'CONTACT',
-  email: 'lingwal82@gmail.com',
+  email: 'lingwaladitya82@gmail.com',
   copyLabel: 'Click to copy',
   copiedLabel: 'Copied',
   links: [

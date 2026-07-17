@@ -29,7 +29,18 @@ export default function WorkExperience() {
                 <span className="jr-num">{entry.chapter}</span>
                 <h2 className="jr-role">{entry.role}</h2>
                 <span className="jr-co">
-                  <span className={`keyword keyword-${entry.companyKeyword}`}>{entry.company}</span>
+                  {entry.companyHref ? (
+                    <a
+                      className={`keyword keyword-${entry.companyKeyword}`}
+                      href={entry.companyHref}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {entry.company}
+                    </a>
+                  ) : (
+                    <span className={`keyword keyword-${entry.companyKeyword}`}>{entry.company}</span>
+                  )}
                 </span>
               </div>
               <p className="jr-dates">{entry.meta}</p>

@@ -402,9 +402,6 @@ header {
 .exp-hero {
   padding: clamp(48px, 6vh, 72px) 0 clamp(28px, 4vh, 42px);
 }
-.story {
-  max-width: 900px;
-}
 .eyebrow {
   font-family: theme('fontFamily.mono');
   font-size: 14px;
@@ -422,40 +419,19 @@ header {
   letter-spacing: -0.03em;
   font-weight: 400;
   margin: 0 0 clamp(44px, 5vh, 64px);
-  text-wrap: balance;
-  max-width: 20ch;
 }
 .page-lead strong {
   font-weight: 700;
 }
 
 /* ── Blogs — the empty state: one label, one sentence, nothing else.
-       The lead takes the full wrap width instead of the 20ch measure the
-       content-heavy pages use — a 20ch line stranded at the left of a wide
-       screen reads as an accident. It still shrinks by itself on narrow
-       screens: the shared clamp() font size and normal wrapping do the work,
-       so there is no separate mobile rule. Everything is scoped to
-       .blogs-hero so the shared .story / .page-lead stay exactly as Work
-       Experience and Projects expect them. ── */
-.blogs-hero .story {
-  max-width: none;
-}
+       .page-lead is already full wrap width on every page now (no max-width),
+       so this block only adds the one refinement worth having here: `pretty`
+       wrapping keeps the last line from stranding a single word alone. Scoped
+       to .blogs-hero so Work Experience and Projects are untouched. ── */
 .blogs-hero .page-lead {
-  max-width: none;
   /* last element on the page — the shared bottom margin has nothing to separate */
   margin-bottom: 0;
-  /* The shared .page-lead sets text-wrap: balance, which evens out line lengths
-     and so deliberately leaves the right side empty. That suits a 20ch heading;
-     it looks broken on a full-width line, where it breaks after "The" while a
-     third of the row sits unused. Fill each line instead and only push down what
-     genuinely does not fit.
-     Two declarations on purpose: `wrap` resets the style longhand to auto (plain
-     greedy) and is the floor; `pretty` then adds the one refinement worth having
-     — it will not strand a single word alone on the last line. A browser without
-     `pretty` drops that line and keeps greedy, never falling back to balance.
-     Note: `text-wrap: normal` does NOT work here — it is not a valid value, so the
-     declaration is dropped and balance silently survives. */
-  text-wrap: wrap;
   text-wrap: pretty;
 }
 
@@ -500,9 +476,10 @@ header {
 .jr-dates {
   font-family: theme('fontFamily.mono');
   font-size: 12.5px;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: theme('colors.muted');
+  color: theme('colors.ink');
   margin: 0 0 clamp(28px, 3.5vh, 38px);
   display: flex;
   align-items: center;
@@ -567,13 +544,12 @@ header {
   font-size: clamp(17px, 1.5vw, 21px);
   line-height: 1.5;
   margin: 0;
-  color: theme('colors.muted');
-  max-width: 56ch;
+  color: theme('colors.ink');
 }
 .jr-emphasis {
   font-style: normal;
   color: theme('colors.ink');
-  font-weight: 500;
+  font-weight: 600;
 }
 .stop2 .bullets li:last-child {
   margin-bottom: 0;
@@ -584,7 +560,6 @@ header {
   letter-spacing: -0.02em;
   font-weight: 400;
   margin: 0;
-  max-width: 32ch;
 }
 .jr-punch strong {
   font-weight: 700;
@@ -628,7 +603,6 @@ header {
   padding-left: 30px;
   position: relative;
   margin: 0 0 13px;
-  max-width: 72ch;
 }
 .bullets li .arr {
   position: absolute;
@@ -654,8 +628,8 @@ header {
 }
 /* ── Personal Projects — "Teardown Sheets" (scratchpad/projects-directions.template.html #dirE).
        Each project renders as a bordered specimen sheet with mono-labeled
-       spec rows; the row-tint hover is the page's single signature
-       interaction (see .sheet-row:hover below). ── */
+       spec rows. No hover tint on rows — the sheet layout itself carries
+       the visual interest. ── */
 .sheets {
   display: flex;
   flex-direction: column;
@@ -704,7 +678,8 @@ header {
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: theme('colors.muted');
+  color: theme('colors.ink');
+  font-weight: 700;
 }
 .live-pill {
   display: inline-flex;
@@ -733,16 +708,9 @@ header {
   display: grid;
   grid-template-columns: 190px 1fr;
   border-bottom: 1.5px solid theme('colors.ink');
-  transition: background 200ms ease;
 }
 .sheet-row:last-child {
   border-bottom: 0;
-}
-.sheet.accent-pink .sheet-row:hover {
-  background: rgba(247, 131, 172, 0.08);
-}
-.sheet.accent-mint .sheet-row:hover {
-  background: rgba(128, 216, 179, 0.1);
 }
 .sheet-label {
   font-family: theme('fontFamily.mono');
@@ -850,6 +818,9 @@ header {
 }
 .contact-hero .eyebrow {
   margin-bottom: clamp(24px, 3vh, 34px);
+  /* flex-column parent stretches children; keep the rule as wide as the text,
+     like every other page's eyebrow. */
+  align-self: flex-start;
 }
 
 .ct-addr-row {
@@ -985,10 +956,6 @@ header {
 @media (prefers-reduced-motion: reduce) {
   .cta,
   .site-nav li {
-    transition: none;
-  }
-
-  .sheet-row {
     transition: none;
   }
 

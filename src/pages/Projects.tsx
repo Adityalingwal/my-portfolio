@@ -5,11 +5,10 @@ import { projectsContent } from '@/data/projects';
  * '/projects' — Direction E "Teardown Sheets" from
  * scratchpad/projects-directions.template.html (#dirE).
  * Each project renders as a bordered specimen sheet with mono-labeled spec
- * rows (WHAT / HOW IT WORKS / MEASURED / STACK / PROOF) — Aditya reverse
+ * rows (WHAT / FEATURES / STATS / STACK / SOURCE) — Aditya reverse
  * engineers other products, so his own products are presented the same way.
- * No entrance animation by design; the row-tint on hover is the one
- * signature interaction (Von Restorff isolation — exactly one memorable
- * idea per page).
+ * No entrance animation by design and no hover tint on the rows; the sheet
+ * layout itself carries the visual interest.
  */
 export default function Projects() {
   return (
@@ -46,10 +45,10 @@ export default function Projects() {
                   </div>
 
                   <div className="sheet-row">
-                    <dt className="sheet-label">How it works</dt>
+                    <dt className="sheet-label">Features</dt>
                     <dd className="sheet-val">
                       <ul className="bullets">
-                        {sheet.howItWorks.map((line, i) => (
+                        {sheet.features.map((line, i) => (
                           <li key={i}>
                             <span className="arr">+</span>
                             <Segments segments={line} />
@@ -59,19 +58,21 @@ export default function Projects() {
                     </dd>
                   </div>
 
-                  <div className="sheet-row">
-                    <dt className="sheet-label">Measured</dt>
-                    <dd className="sheet-val">
-                      <div className="sheet-stats">
-                        {sheet.measured.map((stat) => (
-                          <div key={stat.caption}>
-                            <b>{stat.value}</b>
-                            <span>{stat.caption}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </dd>
-                  </div>
+                  {sheet.measured && (
+                    <div className="sheet-row">
+                      <dt className="sheet-label">Stats</dt>
+                      <dd className="sheet-val">
+                        <div className="sheet-stats">
+                          {sheet.measured.map((stat) => (
+                            <div key={stat.caption}>
+                              <b>{stat.value}</b>
+                              <span>{stat.caption}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </dd>
+                    </div>
+                  )}
 
                   <div className="sheet-row">
                     <dt className="sheet-label">Stack</dt>
@@ -87,15 +88,15 @@ export default function Projects() {
                   </div>
 
                   <div className="sheet-row">
-                    <dt className="sheet-label">Proof</dt>
+                    <dt className="sheet-label">Source</dt>
                     <dd className="sheet-val">
                       <a
                         className="ev-link"
-                        href={sheet.proof.href}
+                        href={sheet.source.href}
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {sheet.proof.label}
+                        {sheet.source.label}
                       </a>
                     </dd>
                   </div>
