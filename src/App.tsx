@@ -1,24 +1,19 @@
-import { Routes, Route } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 import NavPills from '@/components/NavPills';
 import Grain from '@/components/Grain';
-import AboutMe from '@/pages/AboutMe';
-import WorkExperience from '@/pages/WorkExperience';
-import Projects from '@/pages/Projects';
-import Blogs from '@/pages/Blogs';
-import Contact from '@/pages/Contact';
 
+/**
+ * Root layout: shared chrome around every page. ScrollRestoration lives here —
+ * new navigations start at the top, back/forward restore the exact prior
+ * position (persisted per history entry, surviving reloads).
+ */
 export default function App() {
   return (
     <>
       <Grain />
       <NavPills />
-      <Routes>
-        <Route path="/" element={<AboutMe />} />
-        <Route path="/experience" element={<WorkExperience />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <Outlet />
+      <ScrollRestoration />
     </>
   );
 }
