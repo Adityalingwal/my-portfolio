@@ -1,28 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
-import { contactContent, type ContactRow } from '@/data/contact';
+import { contactContent } from '@/data/contact';
 
 /**
- * '/contact' — Direction "The card" from scratchpad/contact-final.html.
+ * '/contact' — the address is the page (scratchpad/contact-final.html).
  *
- * One full-width box, one row per channel: mono key, the real value as
- * plain readable text, and one pill action on the right.
+ * Only the email is set large: it is the only value here anyone needs to read,
+ * because you copy it and paste it elsewhere. The three profiles show a name
+ * and nothing else — a URL on screen is noise when a tap does the whole job.
  *
- * Deliberately NOT the Personal Projects specimen sheet: square corners (no
- * 14px radius), no rotated SPECIMEN stamp, no label divider rule, and every
- * row ends in a real pill button — which no sheet row ever has.
- *
- * The action per row is the one that channel actually needs (information
- * scent — the label predicts exactly what happens):
- *   Email  -> "Click to copy"  (you paste an address into a mail client)
- *   Others -> "Open ->"        (nobody pastes a LinkedIn URL anywhere)
- *
- * Recognition over recall: every value is visible plain text, so the page
- * works fully even if you never click anything.
+ * Exactly one control handles the copy: the pill. The address itself is plain
+ * text, so there is never a question of which target to hit. The address wears
+ * the site's CTA gradient as a static underline — it marks the important value
+ * without pretending to be clickable.
  */
 
 const COPY_CONFIRM_MS = 1600;
 
-function CopyPill({ row }: { row: ContactRow }) {
+function CopyPill() {
   const [copied, setCopied] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -33,11 +27,11 @@ function CopyPill({ row }: { row: ContactRow }) {
   }, []);
 
   const handleClick = async () => {
-    if (!navigator.clipboard || !row.copyValue) return; // no clipboard -> no false "Copied"
+    if (!navigator.clipboard) return; // no clipboard -> no false "Copied"
     try {
-      await navigator.clipboard.writeText(row.copyValue);
+      await navigator.clipboard.writeText(contactContent.email);
     } catch {
-      return; // rejected write -> leave the label alone, never show a false "Copied"
+      return; // rejected write -> leave the label alone, never confirm a copy that did not happen
     }
     setCopied(true);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -47,12 +41,12 @@ function CopyPill({ row }: { row: ContactRow }) {
   return (
     <button
       type="button"
-      className="ct-act"
+      className="ct-copy"
       data-copied={copied ? 'true' : 'false'}
       aria-live="polite"
       onClick={handleClick}
     >
-      {copied ? 'Copied' : 'Click to copy'}
+      {copied ? contactContent.copiedLabel : contactContent.copyLabel}
     </button>
   );
 }
@@ -62,27 +56,24 @@ export default function Contact() {
     <main className="wrap">
       <section className="contact-hero">
         <p className="eyebrow">{contactContent.eyebrow}</p>
-        <div className="ct-card">
-          {contactContent.rows.map((row) => (
-            <div className={`ct-row ct-${row.slug}`} key={row.id}>
-              <span className="ct-k">{row.key}</span>
-              <a
-                className="ct-v"
-                href={row.href}
-                {...(row.action === 'open' ? { target: '_blank', rel: 'noreferrer' } : {})}
-              >
-                {row.display}
-              </a>
-              {row.action === 'copy' ? (
-                <CopyPill row={row} />
-              ) : (
-                <a className="ct-act" href={row.href} target="_blank" rel="noreferrer">
-                  Open &rarr;
-                </a>
-              )}
-            </div>
-          ))}
+
+        <div className="ct-addr-row">
+          <p className="ct-addr">{contactContent.email}</p>
+          <CopyPill />
         </div>
+
+        <ul className="ct-links">
+          {contactContent.links.map((link) => (
+            <li key={link.id}>
+              <a className={`ct-${link.slug}`} href={link.href} target="_blank" rel="noreferrer">
+                {link.label}
+                <span className="go" aria-hidden="true">
+                  &rarr;
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   );
