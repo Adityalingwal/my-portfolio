@@ -1,4 +1,3 @@
-import Cta from '@/components/Cta';
 import Segments from '@/components/Segments';
 import { projectsContent } from '@/data/projects';
 
@@ -103,16 +102,6 @@ export default function Projects() {
                 </dl>
               </article>
             ))}
-          </div>
-
-          <div className="next-row">
-            <span className="next-label">{projectsContent.nextLabel}</span>
-            <Cta href={projectsContent.ctaPrimaryHref} variant="fill" withArrow>
-              {projectsContent.ctaPrimary}
-            </Cta>
-            <Cta href={projectsContent.ctaSecondaryHref} variant="ghost" withArrow>
-              {projectsContent.ctaSecondary}
-            </Cta>
           </div>
         </div>
       </section>

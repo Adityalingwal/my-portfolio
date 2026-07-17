@@ -394,10 +394,10 @@ header {
 }
 
 /* ── Work Experience — "The Journey, refined" (scratchpad/work-exp-v3-directions.template.html
-       #dirK2), plus the evidence link + "Where to next" CTA row shared with
-       the earlier Ledger implementation. Also used by Personal Projects
-       (.exp-hero / .eyebrow / .page-lead / .bullets / .ev-link / .next-row /
-       .next-label / .live-pill / .keyword* below are shared — do not scope
+       #dirK2), plus the evidence link shared with the earlier Ledger
+       implementation. Also used by Personal Projects and Blogs
+       (.exp-hero / .eyebrow / .page-lead / .bullets / .ev-link /
+       .live-pill / .keyword* below are shared — do not scope
        them to Work Experience only). ── */
 .exp-hero {
   padding: clamp(48px, 6vh, 72px) 0 clamp(28px, 4vh, 42px);
@@ -428,6 +428,36 @@ header {
 .page-lead strong {
   font-weight: 700;
 }
+
+/* ── Blogs — "Zero" (scratchpad/blogs-final.html). Anchoring: the first thing
+       the eye lands on is a real number, honestly zero. Mono face (Space Mono)
+       is the site's data/metadata voice, so the count reads as a measurement
+       rather than decoration. The rule under the caption reuses the same 2px
+       ink rule vocabulary as .eyebrow. ── */
+.count {
+  font-family: theme('fontFamily.mono');
+  font-size: clamp(64px, 9vw, 124px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0 0 6px;
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+.count-cap {
+  font-family: theme('fontFamily.mono');
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: theme('colors.muted');
+  display: block;
+  margin: 0 0 clamp(28px, 3.6vh, 40px);
+  padding-bottom: 10px;
+  border-bottom: 2px solid theme('colors.ink');
+  max-width: max-content;
+}
+
 .journey2 {
   border-top: 2px solid theme('colors.ink');
   padding: clamp(38px, 5vh, 56px) 0 clamp(42px, 5vh, 60px);
@@ -613,24 +643,6 @@ header {
 .ev-link:focus-visible {
   text-decoration-color: theme('colors.orange');
 }
-.next-row {
-  margin-top: clamp(44px, 6vh, 64px);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-.next-label {
-  font-family: theme('fontFamily.mono');
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  margin-right: 8px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid theme('colors.ink');
-}
-
 /* ── Personal Projects — "Teardown Sheets" (scratchpad/projects-directions.template.html #dirE).
        Each project renders as a bordered specimen sheet with mono-labeled
        spec rows; the row-tint hover is the page's single signature

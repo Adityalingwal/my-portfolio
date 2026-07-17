@@ -37,11 +37,6 @@ export interface ProjectsContent {
   leadPrefix: string;
   leadBold: string;
   sheets: ProjectSheet[];
-  nextLabel: string;
-  ctaPrimary: string;
-  ctaPrimaryHref: string;
-  ctaSecondary: string;
-  ctaSecondaryHref: string;
 }
 
 export const projectsContent: ProjectsContent = {
@@ -124,9 +119,4 @@ export const projectsContent: ProjectsContent = {
       },
     },
   ],
-  nextLabel: 'WHERE TO NEXT',
-  ctaPrimary: 'See work experience',
-  ctaPrimaryHref: '/experience',
-  ctaSecondary: "Let's talk",
-  ctaSecondaryHref: '/contact',
 };

@@ -53,11 +53,6 @@ export interface ExperienceContent {
   leadPrefix: string;
   leadBold: string;
   entries: ExperienceEntry[];
-  nextLabel: string;
-  ctaPrimary: string;
-  ctaPrimaryHref: string;
-  ctaSecondary: string;
-  ctaSecondaryHref: string;
 }
 
 export const experienceContent: ExperienceContent = {
@@ -160,9 +155,4 @@ export const experienceContent: ExperienceContent = {
       },
     },
   ],
-  nextLabel: 'WHERE TO NEXT',
-  ctaPrimary: 'See personal projects',
-  ctaPrimaryHref: '/projects',
-  ctaSecondary: "Let's talk",
-  ctaSecondaryHref: '/contact',
 };

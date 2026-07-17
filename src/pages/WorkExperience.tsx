@@ -1,4 +1,3 @@
-import Cta from '@/components/Cta';
 import Segments from '@/components/Segments';
 import { experienceContent } from '@/data/experience';
 
@@ -84,16 +83,6 @@ export default function WorkExperience() {
               </div>
             </article>
           ))}
-
-          <div className="next-row">
-            <span className="next-label">{experienceContent.nextLabel}</span>
-            <Cta href={experienceContent.ctaPrimaryHref} variant="fill" withArrow>
-              {experienceContent.ctaPrimary}
-            </Cta>
-            <Cta href={experienceContent.ctaSecondaryHref} variant="ghost" withArrow>
-              {experienceContent.ctaSecondary}
-            </Cta>
-          </div>
         </div>
       </section>
     </main>
