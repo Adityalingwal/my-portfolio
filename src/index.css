@@ -813,6 +813,144 @@ header {
   background: linear-gradient(114deg, rgba(200, 242, 211, 0.5), rgba(224, 248, 211, 0.42));
 }
 
+/* ════════════════════════════════════════════════════════════
+   CONTACT — "The card" (scratchpad/contact-final.html)
+   One full-width box, one row per channel: mono key, the real value as plain
+   readable text, and one pill action on the right.
+
+   Deliberately NOT the Personal Projects specimen sheet: square corners (no
+   14px radius), no rotated SPECIMEN stamp, no label divider rule, and every
+   row ends in a real pill button — which no sheet row ever has.
+
+   The action per row is the one that channel actually needs (information
+   scent — the label predicts exactly what happens):
+     Email    -> "Click to copy"  (you paste an address into a mail client)
+     Others   -> "Open"           (nobody pastes a LinkedIn URL anywhere)
+
+   Recognition over recall: every value is visible plain text, so the page
+   works fully even if you never click anything.
+
+   .contact-hero is intentionally NOT .hero/.exp-hero: this page fills one
+   viewport (min-height: calc(100dvh - 84px)) instead of flowing, and does
+   not use the 900px .story column — it uses the full 1482px .wrap.
+   ════════════════════════════════════════════════════════════ */
+.contact-hero {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 3.6vh, 44px) 0 clamp(24px, 3.2vh, 38px);
+  min-height: calc(100dvh - 84px);
+}
+.ct-card {
+  border: 2px solid theme('colors.ink');
+  background: theme('colors.cream');
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.ct-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 36px);
+  padding: clamp(14px, 2vh, 22px) clamp(18px, 2.4vw, 34px);
+  border-bottom: 2px solid theme('colors.ink');
+  transition: background 220ms ease;
+  min-height: 82px;
+}
+.ct-row:last-child {
+  border-bottom: 0;
+}
+.ct-row.ct-mail:hover {
+  background: color-mix(in srgb, theme('colors.blue') 15%, transparent);
+}
+.ct-row.ct-li:hover {
+  background: color-mix(in srgb, theme('colors.pink') 15%, transparent);
+}
+.ct-row.ct-x:hover {
+  background: color-mix(in srgb, theme('colors.coral') 15%, transparent);
+}
+.ct-row.ct-gh:hover {
+  background: color-mix(in srgb, theme('colors.mint') 15%, transparent);
+}
+.ct-k {
+  font-family: theme('fontFamily.mono');
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: theme('colors.muted');
+  min-width: clamp(78px, 7.5vw, 108px);
+  flex-shrink: 0;
+}
+.ct-v {
+  font-size: clamp(20px, 2.5vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: theme('colors.ink');
+  text-decoration: none;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: border-color 200ms ease;
+  line-height: 1.2;
+}
+.ct-row.ct-mail .ct-v:hover {
+  border-bottom-color: theme('colors.blue');
+}
+.ct-row.ct-li .ct-v:hover {
+  border-bottom-color: theme('colors.pink');
+}
+.ct-row.ct-x .ct-v:hover {
+  border-bottom-color: theme('colors.coral');
+}
+.ct-row.ct-gh .ct-v:hover {
+  border-bottom-color: theme('colors.mint');
+}
+
+/* the pill action — the site's own capsule/ink-border CTA vocabulary,
+   used here as an action rather than navigation. */
+.ct-act {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  font-family: theme('fontFamily.mono');
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: theme('colors.ink');
+  background: theme('colors.cream');
+  border: 1.5px solid theme('colors.ink');
+  border-radius: 99px;
+  padding: 9px 16px;
+  min-height: 38px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background 200ms ease,
+    transform 160ms ease;
+}
+.ct-act:hover {
+  background: linear-gradient(115deg, #becaff 8%, #f3c6df 92%);
+  transform: translateY(-1px);
+}
+.ct-act:active {
+  transform: translateY(1px) scale(0.99);
+}
+.ct-act[data-copied='true'] {
+  background: theme('colors.mint');
+}
+
 /* Touch/coarse pointers get no hover tint, so give the PROOF link a larger
    comfortable tap target there without changing the desktop underline look. */
 @media (hover: none), (pointer: coarse) {
@@ -845,6 +983,16 @@ header {
   .site-nav li:active,
   .cta:hover,
   .cta:active {
+    transform: none;
+  }
+
+  .ct-row,
+  .ct-v,
+  .ct-act {
+    transition: none;
+  }
+  .ct-act:hover,
+  .ct-act:active {
     transform: none;
   }
 }
@@ -911,6 +1059,29 @@ header {
   }
   .sheet-val {
     padding-top: 12px;
+  }
+
+  .contact-hero {
+    min-height: 0;
+  }
+  .ct-row {
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    min-height: 0;
+    padding: 18px;
+  }
+  .ct-k {
+    min-width: 0;
+    flex-basis: 100%;
+  }
+  .ct-v {
+    font-size: 19px;
+    white-space: normal;
+    word-break: break-word;
+    flex-basis: 100%;
+  }
+  .ct-act {
+    margin-left: 0;
   }
 }
 
