@@ -429,33 +429,42 @@ header {
   font-weight: 700;
 }
 
-/* ── Blogs — "Zero" (scratchpad/blogs-final.html). Anchoring: the first thing
-       the eye lands on is a real number, honestly zero. Mono face (Space Mono)
-       is the site's data/metadata voice, so the count reads as a measurement
-       rather than decoration. The rule under the caption reuses the same 2px
-       ink rule vocabulary as .eyebrow. ── */
-.count {
-  font-family: theme('fontFamily.mono');
-  font-size: clamp(64px, 9vw, 124px);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  margin: 0 0 6px;
-  display: block;
-  font-variant-numeric: tabular-nums;
+/* ── Blogs — the empty state: one label, one sentence, nothing else.
+       The lead takes the full wrap width instead of the 20ch measure the
+       content-heavy pages use — a 20ch line stranded at the left of a wide
+       screen reads as an accident. It still shrinks by itself on narrow
+       screens: the shared clamp() font size and normal wrapping do the work,
+       so there is no separate mobile rule. Everything is scoped to
+       .blogs-hero so the shared .story / .page-lead stay exactly as Work
+       Experience and Projects expect them. ── */
+.blogs-hero .story {
+  max-width: none;
 }
-.count-cap {
-  font-family: theme('fontFamily.mono');
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: theme('colors.muted');
-  display: block;
-  margin: 0 0 clamp(28px, 3.6vh, 40px);
-  padding-bottom: 10px;
-  border-bottom: 2px solid theme('colors.ink');
-  max-width: max-content;
+.blogs-hero .page-lead {
+  max-width: none;
+  /* last element on the page — the shared bottom margin has nothing to separate */
+  margin-bottom: 0;
+  /* The shared .page-lead sets text-wrap: balance, which evens out line lengths
+     and so deliberately leaves the right side empty. That suits a 20ch heading;
+     it looks broken on a full-width line, where it breaks after "The" while a
+     third of the row sits unused. Fill each line instead and only push down what
+     genuinely does not fit.
+     Two declarations on purpose: `wrap` resets the style longhand to auto (plain
+     greedy) and is the floor; `pretty` then adds the one refinement worth having
+     — it will not strand a single word alone on the last line. A browser without
+     `pretty` drops that line and keeps greedy, never falling back to balance.
+     Note: `text-wrap: normal` does NOT work here — it is not a valid value, so the
+     declaration is dropped and balance silently survives. */
+  text-wrap: wrap;
+  text-wrap: pretty;
+}
+
+/* Start at the top like every other page. The shared tall-desktop rule further
+   down (min-width: 861px and min-height: 681px) centres .hero vertically; on the
+   content-heavy pages that never shows because they overflow, but this page is
+   short enough for it to bite. Two classes to out-specify it without touching it. */
+.hero.blogs-hero {
+  justify-content: flex-start;
 }
 
 .journey2 {
