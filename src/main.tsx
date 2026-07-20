@@ -8,6 +8,7 @@ import WorkExperience from '@/pages/WorkExperience';
 import Projects from '@/pages/Projects';
 import Blogs from '@/pages/Blogs';
 import Contact from '@/pages/Contact';
+import NotFound from '@/pages/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: '/projects', element: <Projects /> },
       { path: '/blogs', element: <Blogs /> },
       { path: '/contact', element: <Contact /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ]);
