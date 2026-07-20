@@ -1,10 +1,8 @@
-import { useEffect, useRef } from 'react';
 import { NavLink, useLocation, matchPath } from 'react-router-dom';
-import gsap from 'gsap';
 import { navItems } from '@/data/nav';
 
 /**
- * Capsule nav bar. Hover fills the pill (background invert only, no stretch).
+ * Capsule nav bar. Hover fills the pill (background invert only, no motion).
  * The current route's pill grows via `.active { flex-grow: 3 }` in index.css,
  * matching the measured CalArts 2025 nav behavior. It is driven by the matched
  * route, not by click/hover. `NavLink` also sets
@@ -12,48 +10,11 @@ import { navItems } from '@/data/nav';
  */
 export default function NavPills() {
   const location = useLocation();
-  const listRef = useRef<HTMLUListElement>(null);
-
-  useEffect(() => {
-    const list = listRef.current;
-    if (!list) return;
-
-    const disableMagnet = window.matchMedia(
-      '(prefers-reduced-motion: reduce), (hover: none), (pointer: coarse)',
-    ).matches;
-    if (disableMagnet) return;
-
-    const cleanups = Array.from(list.querySelectorAll('a')).map((link) => {
-      const xTo = gsap.quickTo(link, 'x', { duration: 0.28, ease: 'power3' });
-      const yTo = gsap.quickTo(link, 'y', { duration: 0.28, ease: 'power3' });
-
-      const handleMouseMove = (event: MouseEvent) => {
-        const rect = link.getBoundingClientRect();
-        const x = ((event.clientX - rect.left) / rect.width - 0.5) * 7;
-        const y = ((event.clientY - rect.top) / rect.height - 0.5) * 7;
-        xTo(x);
-        yTo(y);
-      };
-      const handleMouseLeave = () => {
-        xTo(0);
-        yTo(0);
-      };
-
-      link.addEventListener('mousemove', handleMouseMove);
-      link.addEventListener('mouseleave', handleMouseLeave);
-      return () => {
-        link.removeEventListener('mousemove', handleMouseMove);
-        link.removeEventListener('mouseleave', handleMouseLeave);
-      };
-    });
-
-    return () => cleanups.forEach((cleanup) => cleanup());
-  }, []);
 
   return (
     <header>
       <nav aria-label="Main">
-        <ul ref={listRef} className="site-nav">
+        <ul className="site-nav">
           {navItems.map((item) => {
             const isActive = Boolean(
               matchPath({ path: item.to, end: item.to === '/' }, location.pathname),
