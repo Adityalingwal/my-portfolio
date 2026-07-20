@@ -600,6 +600,11 @@ header {
 .ev-link:focus-visible {
   text-decoration-color: theme('colors.orange');
 }
+/* Error page's two escape routes (Reload / Back to home) sit side by side. */
+.error-links {
+  display: flex;
+  gap: 28px;
+}
 /* ── Personal Projects — "Teardown Sheets" (scratchpad/projects-directions.template.html #dirE).
        Each project renders as a bordered specimen sheet with mono-labeled
        spec rows. No hover tint on rows — the sheet layout itself carries
