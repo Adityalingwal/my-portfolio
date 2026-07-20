@@ -5,9 +5,118 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aditya Lingwal</title>
+    <!--
+      First-load splash: pure HTML+CSS so it paints before the JS bundle
+      arrives (no blank cream page on slow connections). React removes it
+      on mount via the useEffect in src/App.tsx. z-index 80 sits above the
+      grain overlay (60) and nav (50) so it fully covers the page underneath.
+    -->
+    <style>
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        background: #fbfaf6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        pointer-events: none;
+      }
+      #splash.leaving {
+        opacity: 0;
+        transition: opacity 380ms ease;
+      }
+      #splash .wordmark {
+        font-family: 'SpaceMono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-weight: 700;
+        font-size: clamp(16px, 1.8vw, 22px);
+        letter-spacing: 0.32em;
+        white-space: nowrap;
+        color: #0e100f;
+      }
+      #splash .wordmark span {
+        display: inline-block;
+        animation: splash-wave 1.8s ease-in-out infinite;
+      }
+      @keyframes splash-wave {
+        0%,
+        100% {
+          color: #0e100f;
+          transform: translateY(0);
+        }
+        12% {
+          color: var(--w-color);
+          transform: translateY(-4px);
+        }
+        24% {
+          color: #0e100f;
+          transform: translateY(0);
+        }
+      }
+      /* Motion-sensitive visitors get the static ink wordmark and an instant hide. */
+      @media (prefers-reduced-motion: reduce) {
+        #splash .wordmark span {
+          animation: none;
+        }
+        #splash.leaving {
+          transition: none;
+        }
+      }
+    </style>
+    <!-- JS-disabled visitors would otherwise see the splash forever. -->
+    <noscript>
+      <style>
+        #splash {
+          display: none;
+        }
+      </style>
+    </noscript>
   </head>
   <body>
     <div id="root"></div>
+    <div id="splash" aria-hidden="true">
+      <div class="wordmark"><span
+        style="animation-delay: 0s; --w-color: #91A7FF"
+        >A</span
+      ><span
+        style="animation-delay: 0.09s; --w-color: #FFD166"
+        >D</span
+      ><span
+        style="animation-delay: 0.18s; --w-color: #F783AC"
+        >I</span
+      ><span
+        style="animation-delay: 0.27s; --w-color: #80D8B3"
+        >T</span
+      ><span
+        style="animation-delay: 0.36s; --w-color: #FF8787"
+        >Y</span
+      ><span
+        style="animation-delay: 0.45s; --w-color: #FF4D1F"
+        >A</span
+      >&nbsp;<span
+        style="animation-delay: 0.63s; --w-color: #FFD166"
+        >L</span
+      ><span
+        style="animation-delay: 0.72s; --w-color: #F783AC"
+        >I</span
+      ><span
+        style="animation-delay: 0.81s; --w-color: #80D8B3"
+        >N</span
+      ><span
+        style="animation-delay: 0.9s; --w-color: #FF8787"
+        >G</span
+      ><span
+        style="animation-delay: 0.99s; --w-color: #FF4D1F"
+        >W</span
+      ><span
+        style="animation-delay: 1.08s; --w-color: #91A7FF"
+        >A</span
+      ><span
+        style="animation-delay: 1.17s; --w-color: #FFD166"
+        >L</span
+      ></div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
