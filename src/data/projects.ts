@@ -107,7 +107,7 @@ export const projectsContent: ProjectsContent = {
         { value: '100%', caption: 'run success rate' },
         { value: '4.17★', caption: 'user rating' },
       ],
-      stack: ['Apify SDK', 'TypeScript', 'LLM APIs'],
+      stack: ['Apify SDK', 'Python', 'LLM APIs'],
       source: {
         label: 'View on Apify Store →',
         href: 'https://apify.com/adityalingwal/ai-brand-visibility',
