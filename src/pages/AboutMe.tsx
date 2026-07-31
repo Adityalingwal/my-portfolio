@@ -1,4 +1,3 @@
-import Cta from '@/components/Cta';
 import ReconstructText from '@/components/ReconstructText';
 import { aboutContent } from '@/data/about';
 
@@ -48,7 +47,6 @@ export default function AboutMe() {
                     )}
                   </li>
                 ))}
-                <li className="more">{aboutContent.currentMore}</li>
               </ul>
             </div>
             <div>
@@ -71,11 +69,6 @@ export default function AboutMe() {
             </div>
           </div>
 
-          <div className="cta-row">
-            <Cta href={aboutContent.ctaHref}>
-              {aboutContent.cta}
-            </Cta>
-          </div>
         </div>
       </section>
     </main>
