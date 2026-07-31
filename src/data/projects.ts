@@ -48,30 +48,60 @@ export const projectsContent: ProjectsContent = {
       id: 'stayfree',
       specimen: 'Specimen 01',
       name: 'StayFree',
-      category: 'Desktop voice dictation',
+      category: 'macOS voice dictation',
       statusLabel: 'Shipped',
       accent: 'pink',
       what: [
         {
-          text: "Press a key, speak, and your words appear as text in whatever app you're using — on ",
+          text: 'Press and hold the ',
         },
-        { text: 'Mac and Windows', keyword: 'pink' as KeywordColor },
-        { text: '.' },
+        { text: 'Option key', keyword: 'blue' as KeywordColor },
+        { text: ', speak naturally in ' },
+        { text: 'English or Hinglish', keyword: 'pink' as KeywordColor },
+        { text: ', then release — your words appear in whatever app you’re using on your Mac.' },
       ],
       features: [
         [
-          { text: 'Audio streams over a WebSocket as you speak — text lands ' },
-          { text: 'under 500ms', keyword: 'blue' as KeywordColor },
-          { text: ' after you release the key.' },
+          {
+            text: 'Near-instant dictation for short and long thoughts — 30 seconds of speech takes around ',
+          },
+          { text: '300–400ms', keyword: 'blue' as KeywordColor },
+          { text: ' to transcribe, while a full minute takes ' },
+          { text: 'less than a second.' },
         ],
-        [{ text: 'Understands English and Hinglish — the way people actually talk.' }],
         [
           {
-            text: "Next: voice notes — press a key, speak your thought, and it's saved as a note.",
+            text: 'The quantized speech model behind StayFree uses around ',
           },
+          { text: '112 MB', keyword: 'pink' as KeywordColor },
+          { text: ' of memory during dictation.' },
+        ],
+        [
+          {
+            text: 'Works ',
+          },
+          { text: 'offline', keyword: 'mint' as KeywordColor },
+          { text: ' and keeps your speech ' },
+          { text: 'private — transcription happens locally on your Mac, with no cloud service involved.' },
+        ],
+        [
+          {
+            text: 'StayFree automatically detects ',
+          },
+          { text: 'microphone changes', keyword: 'coral' as KeywordColor },
+          { text: ' and Bluetooth connections, so you can keep speaking without changing settings.' },
+        ],
+        [
+          {
+            text: 'Speak in ',
+          },
+          { text: 'English', keyword: 'blue' as KeywordColor },
+          { text: ', ' },
+          { text: 'Hinglish', keyword: 'pink' as KeywordColor },
+          { text: ', or a mix of both — StayFree transcribes your words in the same language and style.' },
         ],
       ],
-      stack: ['Electron', 'TypeScript', 'React', 'WebSocket'],
+      stack: ['Electron', 'TypeScript', 'React', 'AudioWorklet'],
       source: {
         label: 'View repo on GitHub →',
         href: 'https://github.com/Adityalingwal/Stayfree',
