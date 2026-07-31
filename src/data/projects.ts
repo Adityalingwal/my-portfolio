@@ -48,7 +48,7 @@ export const projectsContent: ProjectsContent = {
       id: 'stayfree',
       specimen: 'Specimen 01',
       name: 'StayFree',
-      category: 'macOS voice dictation',
+      category: 'macOS voice dictation app',
       statusLabel: 'Shipped',
       accent: 'pink',
       what: [
